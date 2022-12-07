@@ -1,15 +1,15 @@
 import boto3
 import time
-
-EC2_INSTANCES = {
-    "Ubuntu-20" : "i-04b95ec15429c7be8",
-}
+from config import EC2_INSTANCES
 
 ec2_client = boto3.client('ec2')
 ec2_res = boto3.resource('ec2')
 
+instances_to_activate = [0,]
+
 instances = []
-instances.append(EC2_INSTANCES["Ubuntu-20"])
+for i in instances_to_activate:
+    instances.append(EC2_INSTANCES[i])
 
 try:
     response = ec2_client.start_instances(InstanceIds=instances, DryRun=False)
